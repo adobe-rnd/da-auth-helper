@@ -1,5 +1,5 @@
 {
-  "name": "da-auth",
+  "name": "da-auth-helper",
   "version": "1.0.0",
   "description": "Standalone IMS OAuth 2.0 implicit-flow auth helper for da.live / DA MCP",
   "type": "module",
@@ -8,7 +8,7 @@
     ".": "./src/auth.js"
   },
   "bin": {
-    "da-auth": "./src/cli.js"
+    "da-auth-helper": "./src/cli.js"
   },
   "scripts": {
     "lint": "eslint src test",

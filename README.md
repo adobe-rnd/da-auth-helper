@@ -1,4 +1,4 @@
-# da-auth
+# da-auth-helper
 
 Standalone IMS OAuth 2.0 implicit-flow authentication helper for [da.live](https://da.live) and the DA MCP server.
 
@@ -13,19 +13,19 @@ Designed to be used by any LLM agent, CLI tool, or Node.js application that need
 ## Install
 
 ```bash
-npm install da-auth
+npm install da-auth-helper
 ```
 
 Or run directly without installing:
 
 ```bash
-npx da-auth token
+npx da-auth-helper token
 ```
 
 ## Programmatic API
 
 ```js
-import { getValidToken, clearStoredToken } from 'da-auth';
+import { getValidToken, clearStoredToken } from 'da-auth-helper';
 
 // Get a token (cached or via browser login)
 const token = await getValidToken();
@@ -59,26 +59,26 @@ Returns `Promise<void>`.
 
 ```bash
 # Print token to stdout (login if needed)
-da-auth token
+da-auth-helper token
 
 # Same as token — explicitly trigger/refresh login
-da-auth login
+da-auth-helper login
 
 # Clear cached token
-da-auth logout
+da-auth-helper logout
 ```
 
 Token is printed to **stdout**; status messages go to **stderr**, so shell pipelines work cleanly:
 
 ```bash
-TOKEN=$(da-auth token)
+TOKEN=$(da-auth-helper token)
 curl -H "Authorization: Bearer $TOKEN" https://admin.da.live/list/org/repo
 ```
 
 ## Use with the DA MCP server
 
 ```js
-import { getValidToken } from 'da-auth';
+import { getValidToken } from 'da-auth-helper';
 import { DaMcpClient } from '@adobe/da-mcp'; // example MCP client
 
 const token = await getValidToken({ log: (m) => process.stderr.write(m + '\n') });

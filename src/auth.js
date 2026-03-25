@@ -14,7 +14,7 @@
  * Standalone IMS OAuth 2.0 implicit-flow auth module for da.live / DA MCP.
  *
  * Usage:
- *   import { getValidToken } from 'da-auth';
+ *   import { getValidToken } from 'da-auth-helper';
  *   const token = await getValidToken();
  *
  * The token is persisted at ~/.aem/da-token.json so subsequent calls return

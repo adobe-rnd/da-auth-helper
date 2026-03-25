@@ -15,9 +15,9 @@
  * Minimal CLI entrypoint.
  *
  * Commands:
- *   da-auth login    — obtain / refresh a token and print it to stdout
- *   da-auth logout   — clear the cached token
- *   da-auth token    — print the current token (login if needed)
+ *   da-auth-helper login    — obtain / refresh a token and print it to stdout
+ *   da-auth-helper logout   — clear the cached token
+ *   da-auth-helper token    — print the current token (login if needed)
  */
 
 import { getValidToken, clearStoredToken } from './auth.js';
@@ -41,7 +41,7 @@ try {
     }
     default:
       log(`Unknown command: ${command}`);
-      log('Usage: da-auth [login|logout|token]');
+      log('Usage: da-auth-helper [login|logout|token]');
       process.exit(1);
   }
 } catch (err) {
