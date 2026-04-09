@@ -113,9 +113,11 @@ function waitForToken({ timeoutMs = 5 * 60 * 1000 } = {}) {
       + (expiresIn ? '&expires_in=' + encodeURIComponent(expiresIn) : '')
     : '/token?error=' + encodeURIComponent(error || 'unknown');
   fetch(dest).finally(() => {
-    document.body.innerHTML = token
-      ? '<h2>Login successful!</h2><p>You may close this tab and return to your terminal.</p>'
-      : '<h2>Login failed.</h2><p>' + (error || 'Unknown error') + '</p>';
+    if (token) {
+      window.location.href = 'https://tools.aem.live/cli/logged-in';
+    } else {
+      document.body.innerHTML = '<h2>Login failed.</h2><p>' + (error || 'Unknown error') + '</p>';
+    }
   });
 </script>
 </body>
