@@ -14,6 +14,7 @@
     "lint": "eslint src test",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
+  "private": true,
   "keywords": ["adobe", "da", "da.live", "ims", "auth", "oauth", "mcp"],
   "license": "Apache-2.0",
   "dependencies": {
