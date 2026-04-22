@@ -10,16 +10,12 @@ Designed to be used by any LLM agent, CLI tool, or Node.js application that need
 2. If none, starts a local HTTP server on port **9898**, opens the IMS login page in the user's default browser, waits for the OAuth callback, persists the token, and shuts down.
 3. Returns the token string.
 
-## Install
+## Run
+
+Run directly without installing:
 
 ```bash
-npm install da-auth-helper
-```
-
-Or run directly without installing:
-
-```bash
-npx da-auth-helper token
+npx github:adobe-rnd/da-auth-helper token
 ```
 
 ## Programmatic API
