@@ -60,8 +60,12 @@ async function loadStoredToken() {
 }
 
 async function storeToken(tokenData) {
-  await fse.ensureDir(path.dirname(TOKEN_FILE));
-  await fse.writeJson(TOKEN_FILE, tokenData, { spaces: 2 });
+  await fse.ensureDir(path.dirname(TOKEN_FILE), { mode: 0o700 });
+  // writeJson's mode applies only when the file is first created, so drop any
+  // leftover file. A token written into an existing 0644 file would be readable
+  // by other users until a later chmod.
+  await fse.remove(TOKEN_FILE);
+  await fse.writeJson(TOKEN_FILE, tokenData, { spaces: 2, mode: 0o600 });
 }
 
 // ─── Token validity ──────────────────────────────────────────────────────────

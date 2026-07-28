@@ -179,6 +179,31 @@ describe('getValidToken — browser login flow', () => {
     expect(data.expires_at).toBeLessThanOrEqual(after + expiresIn * 1000);
   });
 
+  test('stores the token 0600 in a 0700 dir', async () => {
+    mockFs.pathExists.mockResolvedValue(false);
+    mockOpen.mockImplementationOnce(async () => { simulateBrowserCallback('SAVED_TOKEN', 3600); });
+
+    await getValidToken({ log: () => {} });
+
+    expect(mockFs.ensureDir).toHaveBeenCalledWith(
+      path.dirname(TOKEN_FILE),
+      expect.objectContaining({ mode: 0o700 }),
+    );
+    const writeOpts = mockFs.writeJson.mock.calls[0][2];
+    expect(writeOpts).toMatchObject({ mode: 0o600 });
+  });
+
+  test('drops a leftover token file before writing, so 0600 applies at creation', async () => {
+    mockFs.pathExists.mockResolvedValue(false);
+    mockOpen.mockImplementationOnce(async () => { simulateBrowserCallback('SAVED_TOKEN', 3600); });
+
+    await getValidToken({ log: () => {} });
+
+    expect(mockFs.remove).toHaveBeenCalledWith(TOKEN_FILE);
+    expect(mockFs.remove.mock.invocationCallOrder[0])
+      .toBeLessThan(mockFs.writeJson.mock.invocationCallOrder[0]);
+  });
+
   test('rejects when the browser reports an error', async () => {
     mockFs.pathExists.mockResolvedValue(false);
 
