@@ -174,6 +174,8 @@ async function login({ log = console.info, timeoutMs } = {}) {
     client_id: CLIENT_ID,
     scope: SCOPE,
     redirect_uri: REDIRECT_URI,
+    prompt: 'login',
+    profile_filter: false,
   });
   const authUrl = `${IMS_ORIGIN}/ims/authorize/v2?${params}`;
 
